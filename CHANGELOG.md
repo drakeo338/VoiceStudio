@@ -87,6 +87,7 @@ metadata and the backend fallback mirror it.
 
 ### Fixed
 - Dub assembly, cached segments and audio tools can read generated WAV files when TorchCodec is missing or cannot load (#2379) — thanks @tokutei58301-boop!
+- Stories import keeps WebVTT cues whose identifier is STYLE or REGION (#2434)
 - Remote API-key and share-PIN clients can record and read export history while native filesystem operations stay local (#2383, #2384) — thanks @sedatdagg!
 - Concurrent job events receive unique sequence numbers (#2384) — thanks @sedatdagg!
 - Streaming reuses warm engines, follows model changes and protects active streams during eviction (#2391, #2400) — thanks @DeepanshuPal and @Kishore-MR!

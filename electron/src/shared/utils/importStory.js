@@ -83,7 +83,9 @@ function captionBlocks(text, webvtt) {
     if (!lines.length) return false;
     const first = lines[0];
     if (/^WEBVTT(?:[ \t]|$)/.test(first)) return false;
-    return !isWebVttMetadata(first);
+    if (!isWebVttMetadata(first)) return true;
+    // A cue may be named STYLE or REGION; the timing line after it marks a cue.
+    return /^(?:STYLE|REGION)$/.test(first) && !!lines[1] && isTimingLine(lines[1]);
   });
 }
 

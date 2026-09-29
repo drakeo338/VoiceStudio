@@ -102,6 +102,13 @@ describe('parseSrt', () => {
       'cue-2\n00:00:03.000 --> 00:00:04.000\nQue tal\n';
     expect(parseSrt(vtt)).toBe('Hola\nQue tal');
   });
+  it.each(['STYLE', 'REGION'])('keeps a cue whose identifier is %s', (id) => {
+    const vtt =
+      `WEBVTT\n\n${id}\n00:00:01.000 --> 00:00:02.000\nHello world.\n\n` +
+      'next\n00:00:03.000 --> 00:00:04.000\nStill here.\n';
+    expect(parseSrt(vtt)).toBe('Hello world.\nStill here.');
+    expect(importToText('captions.vtt', vtt)).toBe('Hello world.\nStill here.');
+  });
   it('does not speak arrow-bearing WebVTT metadata without a timing line', () => {
     const vtt =
       'WEBVTT\n\nNOTE\nTransition A --> B\nprivate note\n\n' +
